@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Financiera · Recreo San Ignacio 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0e1a2b;
+    --bg2:      #112030;
+    --bg3:      #132035;
+    --bg4:      #1a2d45;
+    --bg5:      #1e3550;
+    --border:   #1e3550;
+    --border2:  #264468;
+    --text:     #dce8f5;
+    --text2:    #7dadd4;
+    --text3:    #4a7aaa;
+    --gold:     #e8a53a;
+    --gold2:    #f0bc6e;
+    --gold-dim: rgba(232,165,58,0.12);
+    --gold-brd: rgba(232,165,58,0.32);
+    --red:      #e85858;
+    --red-dim:  rgba(232,88,88,0.12);
+    --red-brd:  rgba(232,88,88,0.32);
+    --amber:    #f0a030;
+    --amber-dim:rgba(240,160,48,0.1);
+    --amber-brd:rgba(240,160,48,0.3);
+    --blue:     #5aaeff;
+    --blue-dim: rgba(90,174,255,0.1);
+    --blue-brd: rgba(90,174,255,0.3);
+    --green:    #3ec98a;
+    --r: 14px;
+    --r-sm: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  /* ── HEADER ── */
+  .hdr {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 20px 18px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .hdr-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-brd);
+    color: var(--gold);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.13em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+  }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.65)} }
+  .hdr h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(19px, 5.5vw, 28px);
+    font-weight: 800; color: var(--text); line-height: 1.15;
+  }
+  .hdr h1 span { color: var(--gold); }
+  .hdr-sub { font-size: 12px; color: var(--text3); margin-top: 5px; }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex; gap: 6px; overflow-x: auto;
+    padding: 12px 20px; scrollbar-width: none;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .pill {
+    flex-shrink: 0; padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border2);
+    background: transparent; color: var(--text3);
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .pill.active-all  { background: var(--bg4); color: var(--text); border-color: var(--border2); }
+  .pill.active-red  { background: var(--red-dim); color: var(--red); border-color: var(--red-brd); }
+  .pill.active-amb  { background: var(--amber-dim); color: var(--amber); border-color: var(--amber-brd); }
+  .pill.active-blu  { background: var(--blue-dim); color: var(--blue); border-color: var(--blue-brd); }
+  .pill.active-gld  { background: var(--gold-dim); color: var(--gold); border-color: var(--gold-brd); }
+
+  /* ── MAIN ── */
+  .main { padding: 0 16px; max-width: 640px; margin: 0 auto; }
+
+  /* ── RESUMEN GRID ── */
+  .sum-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    padding: 20px 0 8px;
+  }
+  .sum-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 16px 14px;
+  }
+  .sum-card.danger { border-color: var(--red-brd); background: var(--red-dim); }
+  .sum-card.warn   { border-color: var(--amber-brd); background: var(--amber-dim); }
+  .sum-card.info   { border-color: var(--blue-brd); background: var(--blue-dim); }
+  .sum-num {
+    font-family: 'Syne', sans-serif; font-size: 32px;
+    font-weight: 800; line-height: 1; margin-bottom: 5px;
+  }
+  .sum-card.danger .sum-num { color: var(--red); }
+  .sum-card.warn   .sum-num { color: var(--amber); }
+  .sum-card.info   .sum-num { color: var(--blue); }
+  .sum-card:not(.danger):not(.warn):not(.info) .sum-num { color: var(--gold); }
+  .sum-lbl { font-size: 11px; color: var(--text2); font-weight: 500; line-height: 1.3; }
+
+  /* ── DÉFICIT BANNER ── */
+  .deficit {
+    background: linear-gradient(135deg, #1a1018 0%, #1e1520 50%, #18100e 100%);
+    border: 1px solid var(--red-brd); border-radius: var(--r);
+    padding: 20px; margin: 4px 0 14px; overflow: hidden; position: relative;
+  }
+  .deficit::after {
+    content:''; position:absolute; top:-40px; right:-40px;
+    width:140px; height:140px;
+    background: radial-gradient(circle, rgba(232,88,88,.1) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .deficit-lbl { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 6px; }
+  .deficit-num {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 8vw, 42px);
+    font-weight: 800; color: var(--red); line-height: 1; margin-bottom: 10px;
+  }
+  .deficit-txt { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .deficit-txt strong { color: var(--text); }
+
+  /* ── PROGRESS ── */
+  .prog-wrap { margin: 10px 0 2px; }
+  .prog-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+  .prog-row span:last-child { font-weight: 500; }
+  .prog-bar { height: 5px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 3px; transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    display: flex; align-items: center; gap: 10px;
+    padding: 22px 0 10px;
+  }
+  .sec-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .sec-title h2 {
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .13em; color: var(--text2);
+  }
+  .sec-badge {
+    margin-left: auto; font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 10px;
+  }
+  .expand-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--bg4); border: 1px solid var(--border2);
+    color: var(--text2); font-size: 11px; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    padding: 6px 13px; border-radius: 20px;
+    cursor: pointer; margin-bottom: 10px; transition: background .2s;
+  }
+  .expand-btn:active { background: var(--bg5); }
+
+  /* ── ALERTA CARD ── */
+  .alerta {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--r); margin-bottom: 10px; overflow: hidden;
+    transition: border-color .2s, transform .15s;
+  }
+  .alerta:active { transform: scale(.995); }
+  .alerta.critico    { border-left: 3px solid var(--red); }
+  .alerta.advertencia{ border-left: 3px solid var(--amber); }
+  .alerta.observacion{ border-left: 3px solid var(--blue); }
+  .alerta.open { border-color: var(--border2); }
+
+  .a-hdr {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 15px 15px 15px 13px; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+  }
+  .a-ico {
+    width: 34px; height: 34px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0; margin-top: 1px;
+  }
+  .critico .a-ico     { background: var(--red-dim); }
+  .advertencia .a-ico { background: var(--amber-dim); }
+  .observacion .a-ico { background: var(--blue-dim); }
+
+  .a-info { flex: 1; min-width: 0; }
+  .a-title {
+    font-size: 14px; font-weight: 500; color: var(--text);
+    line-height: 1.4; margin-bottom: 5px;
+  }
+  .a-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .07em; padding: 2px 7px; border-radius: 4px;
+  }
+  .tag-red  { background: var(--red-dim);   color: var(--red); }
+  .tag-amb  { background: var(--amber-dim); color: var(--amber); }
+  .tag-blu  { background: var(--blue-dim);  color: var(--blue); }
+  .a-loc { font-size: 11px; color: var(--text3); }
+
+  .chevron {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--bg4); display: flex; align-items: center;
+    justify-content: center; margin-top: 4px;
+    transition: transform .3s, background .2s;
+    color: var(--text3); font-size: 10px;
+  }
+  .alerta.open .chevron { transform: rotate(180deg); background: var(--bg5); color: var(--text2); }
+
+  .a-body { max-height: 0; overflow: hidden; transition: max-height .38s cubic-bezier(.4,0,.2,1); }
+  .alerta.open .a-body { max-height: 700px; }
+  .a-body-inner {
+    border-top: 1px solid var(--border); padding: 16px 15px;
+    font-size: 13px; color: var(--text2); line-height: 1.75;
+  }
+  .a-body-inner strong { color: var(--text); font-weight: 500; }
+  .a-body-inner em { color: var(--text2); font-style: italic; }
+
+  .num-pill {
+    display: inline; font-size: 12px; font-weight: 500;
+    background: var(--bg5); border: 1px solid var(--border2);
+    color: var(--gold2); padding: 1px 6px; border-radius: 4px;
+  }
+
+  .callout {
+    margin-top: 12px; padding: 11px 13px;
+    background: var(--bg4); border-left: 3px solid var(--gold);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    font-size: 12px; color: var(--text2); line-height: 1.6;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ── RECOMENDACIONES ── */
+  .recom {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 18px 18px 16px; margin-bottom: 10px;
+    position: relative; overflow: hidden;
+  }
+  .recom::before {
+    content: attr(data-n);
+    position: absolute; right: 14px; top: 10px;
+    font-family: 'Syne', sans-serif; font-size: 44px; font-weight: 800;
+    color: var(--bg5); line-height: 1; pointer-events: none;
+  }
+  .recom-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 7px; }
+  .recom-desc  { font-size: 13px; color: var(--text2); line-height: 1.65; max-width: 90%; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin: 24px 0 0; padding: 16px 18px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--r); font-size: 12px;
+    color: var(--text3); line-height: 1.65;
+  }
+  .footer strong { color: var(--text2); }
+
+  /* ── DIVIDER LINE ── */
+  .divider {
+    height: 1px; background: var(--border);
+    margin: 4px 0 0; border-radius: 1px;
+  }
+
+  /* ── FAB ── */
+  .fab {
+    position: fixed; bottom: 22px; right: 20px;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #c87820 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; cursor: pointer; border: none;
+    box-shadow: 0 4px 18px rgba(232,165,58,.35);
+    transition: transform .2s; z-index: 200;
+  }
+  .fab:active { transform: scale(.92); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 86px; right: 16px;
+    background: var(--bg4); border: 1px solid var(--border2);
+    color: var(--text); font-size: 12px; padding: 10px 15px;
+    border-radius: var(--r-sm); opacity: 0; transform: translateY(8px);
+    transition: all .28s; pointer-events: none; max-width: 210px; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── SECTION BLOCKS ── */
+  .sec-block {}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-eyebrow"><span class="pulse"></span>Informe de auditoría</div>
+  <h1>Recreo <span>San Ignacio</span></h1>
+  <div class="hdr-sub">Estados financieros 2025 · Asamblea 18 de abril de 2026</div>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="nav">
+  <button class="pill active-all" onclick="filter('all',this)">Todo</button>
+  <button class="pill" onclick="filter('critico',this)">🔴 Críticas (5)</button>
+  <button class="pill" onclick="filter('advertencia',this)">🟡 Advertencias (4)</button>
+  <button class="pill" onclick="filter('observacion',this)">🔵 Observaciones (3)</button>
+  <button class="pill" onclick="filter('recomendaciones',this)">✅ Qué pedir</button>
+</div>
+
+<div class="main">
+
+  <!-- RESUMEN -->
+  <div class="sec-block" id="sec-all">
+    <div class="sum-grid">
+      <div class="sum-card danger">
+        <div class="sum-num">5</div>
+        <div class="sum-lbl">Alertas críticas</div>
+      </div>
+      <div class="sum-card warn">
+        <div class="sum-num">4</div>
+        <div class="sum-lbl">Advertencias</div>
+      </div>
+      <div class="sum-card info">
+        <div class="sum-num">3</div>
+        <div class="sum-lbl">Observaciones</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-num">248</div>
+        <div class="sum-lbl">Casas afectadas</div>
+      </div>
+    </div>
+
+    <div class="deficit">
+      <div class="deficit-lbl">⚠ Resultado del ejercicio 2025</div>
+      <div class="deficit-num">−$42.162.712</div>
+      <div class="deficit-txt">El conjunto pasó de una utilidad de $36.4M en 2024 a una <strong>pérdida de $42.2M en 2025</strong>. Una reversión de <strong>$78.5 millones</strong> en un solo año.</div>
+      <div class="prog-wrap" style="margin-top:16px">
+        <div class="prog-row"><span>Ingresos 2025</span><span style="color:var(--blue)">$271.9M</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:87%;background:var(--blue)"></div></div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-row"><span>Gastos 2025</span><span style="color:var(--red)">$314.1M</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- ── CRÍTICAS ── -->
+  <div class="sec-block" id="sec-critico">
+    <div class="sec-title">
+      <div class="sec-dot" style="background:var(--red)"></div>
+      <h2>Alertas críticas</h2>
+      <div class="sec-badge tag tag-red">5 hallazgos</div>
+    </div>
+    <button class="expand-btn" onclick="expandAll('critico')">↕ Expandir todas</button>
+
+    <div class="alerta critico open" id="c1">
+      <div class="a-hdr" onclick="toggle('c1')">
+        <div class="a-ico">⚠️</div>
+        <div class="a-info">
+          <div class="a-title">Inconsistencia grave en el Estado de Resultados</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Página 5 — Encabezados</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El título del documento dice <em>"Del 1 de enero al 31 de diciembre de <strong>2024</strong>"</em> pero la certificación (pág. 7) afirma que cubre el período <strong>2025</strong>. Además los totales de ingresos aparecen <strong>cruzados entre columnas</strong>: primero figura <span class="num-pill">$232.101.855</span> y luego <span class="num-pill">$271.900.287</span> con la variación invertida, lo que hace imposible verificar el resultado de forma independiente.
+          <div class="callout"><strong>Pregunta para la asamblea:</strong> ¿Por qué el período del documento dice 2024 si corresponde a 2025, y por qué los totales de ingresos están transpuestos?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta critico" id="c2">
+      <div class="a-hdr" onclick="toggle('c2')">
+        <div class="a-ico">📉</div>
+        <div class="a-info">
+          <div class="a-title">Déficit de $42.2M sin plan de contingencia</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Nota 15 — Resultado</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El ejercicio 2025 cerró con una <strong>pérdida neta de $42.162.712</strong>, versus una utilidad de <span class="num-pill">$36.384.610</span> en 2024. Ningún documento presentado contiene un <strong>plan de saneamiento financiero</strong> ni propuesta de cuota extraordinaria para cubrir este déficit. La Nota 15 simplemente enuncia la pérdida sin análisis de causas ni medidas correctivas.
+          <div class="callout"><strong>Impacto directo:</strong> Si no se cubre este déficit, el patrimonio continúa deteriorándose y las obras futuras quedarán sin financiamiento.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta critico" id="c3">
+      <div class="a-hdr" onclick="toggle('c3')">
+        <div class="a-ico">🔨</div>
+        <div class="a-info">
+          <div class="a-title">"Obras año" de $70.9M sin soporte ni autorización</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Nota 12 — Mantenimiento</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Se registra <strong>"Obras año"</strong> por <span class="num-pill">$70.936.193</span>. En 2024 este rubro era <span class="num-pill">$0</span>. Representa el <strong>22.9% del total de gastos del año</strong> y no tiene nota explicativa, detalle de obra, nombre de contratista ni acta del consejo que lo autorice.
+          <div class="prog-wrap" style="margin-top:10px">
+            <div class="prog-row"><span>Obras año 2024</span><span style="color:var(--green)">$0</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:1%;background:var(--green)"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-row"><span>Obras año 2025</span><span style="color:var(--red)">$70.9M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--red)"></div></div>
+          </div>
+          <div class="callout"><strong>Sin esta partida, el resultado 2025 habría sido positivo.</strong> Es la causa principal del déficit.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta critico" id="c4">
+      <div class="a-hdr" onclick="toggle('c4')">
+        <div class="a-ico">❓</div>
+        <div class="a-info">
+          <div class="a-title">Consignaciones sin identificar: $27M acumulados</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Nota 8 — Pasivo corriente</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El pasivo <strong>"Consignaciones por identificar"</strong> asciende a <span class="num-pill">$26.998.379</span> en 2025 vs <span class="num-pill">$24.037.558</span> en 2024. Son dineros recibidos que la administración no ha podido — o no ha querido — identificar a quién pertenecen. Que este saldo <strong>crezca año a año</strong> evidencia falta de control en conciliaciones bancarias. Podrían ser pagos de propietarios morosos nunca aplicados correctamente.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta critico" id="c5">
+      <div class="a-hdr" onclick="toggle('c5')">
+        <div class="a-ico">💸</div>
+        <div class="a-info">
+          <div class="a-title">Caja en $3.9M — riesgo de iliquidez inmediata</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Nota 4 — Efectivo</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El efectivo cayó de <span class="num-pill">$31.894.538</span> en 2024 a apenas <span class="num-pill">$3.949.706</span> en 2025: una reducción del <strong>87.6%</strong>. La cuenta AV Villas pasó de <span class="num-pill">$30.014.139</span> a <span class="num-pill">$487.038</span>. Con obligaciones corrientes de <span class="num-pill">$22.047.873</span>, la <strong>razón corriente es menor a 0.2</strong> — nivel de insolvencia técnica.
+          <div class="prog-wrap" style="margin-top:10px">
+            <div class="prog-row"><span>Caja disponible</span><span style="color:var(--green)">$3.9M (18%)</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:18%;background:var(--green)"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-row"><span>Obligaciones corrientes</span><span style="color:var(--red)">$22.0M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--red)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ADVERTENCIAS ── -->
+  <div class="sec-block" id="sec-advertencia">
+    <div class="sec-title">
+      <div class="sec-dot" style="background:var(--amber)"></div>
+      <h2>Advertencias</h2>
+      <div class="sec-badge tag tag-amb">4 hallazgos</div>
+    </div>
+    <button class="expand-btn" onclick="expandAll('advertencia')">↕ Expandir todas</button>
+
+    <div class="alerta advertencia" id="w1">
+      <div class="a-hdr" onclick="toggle('w1')">
+        <div class="a-ico">📄</div>
+        <div class="a-info">
+          <div class="a-title">El documento tiene el año equivocado en el encabezado</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Páginas 5 y 6</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Los estados financieros llevan el título <em>"Del 1 de enero al 31 de diciembre de <strong>2024</strong>"</em> pero la certificación contable afirma que cubren <strong>2025</strong>. Un documento con el año equivocado en el encabezado <strong>no es válido legalmente</strong> ante la alcaldía, bancos ni notarías. El contador debe corregir y re-certificar antes de la aprobación en asamblea.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta advertencia" id="w2">
+      <div class="a-hdr" onclick="toggle('w2')">
+        <div class="a-ico">🏠</div>
+        <div class="a-info">
+          <div class="a-title">Cartera de $87.5M sin provisión de deterioro</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Nota 5 — Cartera</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Las cuentas por cobrar suman <span class="num-pill">$87.555.520</span>, el <strong>91.5% del activo total</strong>. No existe ninguna provisión por deudas de difícil cobro, lo que <strong>sobrestima el activo real</strong> del conjunto. Hay conceptos como "Daños y perjuicios" y multas acumuladas que probablemente nunca se cobrarán. La norma Grupo 3 exige evaluar el deterioro de cartera.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta advertencia" id="w3">
+      <div class="a-hdr" onclick="toggle('w3')">
+        <div class="a-ico">👮</div>
+        <div class="a-info">
+          <div class="a-title">Vigilancia subió 40% sin contrato documentado</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Nota 12 — Servicios</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Vigilancia pasó de <span class="num-pill">$90.447.470</span> a <span class="num-pill">$126.802.809</span>: un aumento del <strong>40.2%</strong>, muy por encima del IPC. Es el <strong>gasto operativo más grande</strong> del conjunto (41% del total de servicios) y no hay nota sobre cambio de empresa, ampliación del servicio ni contrato vigente.
+          <div class="prog-wrap" style="margin-top:10px">
+            <div class="prog-row"><span>Vigilancia 2024</span><span style="color:var(--text2)">$90.4M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:71%;background:var(--amber)"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-row"><span>Vigilancia 2025 (+40%)</span><span style="color:var(--amber)">$126.8M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--amber)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta advertencia" id="w4">
+      <div class="a-hdr" onclick="toggle('w4')">
+        <div class="a-ico">📊</div>
+        <div class="a-info">
+          <div class="a-title">Presentan dos presupuestos 2026 sin propuesta oficial</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Páginas 19 y 20</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Se presentan <strong>dos versiones del presupuesto 2026</strong>: una con cuota de <span class="num-pill">$73.000</span> (incremento 21.7%) y otra con <span class="num-pill">$74.000</span> (incremento 23.7%). La administración debe presentar <strong>una sola propuesta justificada técnicamente</strong>. Dos opciones sin criterio genera confusión y puede usarse para aprobar la más costosa sin debate real.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── OBSERVACIONES ── -->
+  <div class="sec-block" id="sec-observacion">
+    <div class="sec-title">
+      <div class="sec-dot" style="background:var(--blue)"></div>
+      <h2>Observaciones</h2>
+      <div class="sec-badge tag tag-blu">3 hallazgos</div>
+    </div>
+    <button class="expand-btn" onclick="expandAll('observacion')">↕ Expandir todas</button>
+
+    <div class="alerta observacion" id="o1">
+      <div class="a-hdr" onclick="toggle('o1')">
+        <div class="a-ico">🖥️</div>
+        <div class="a-info">
+          <div class="a-title">Activos fijos depreciados al 100% — sin plan de reposición</div>
+          <div class="a-meta"><span class="tag tag-blu">Observación</span><span class="a-loc">Notas 6 y 7</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Los activos fijos (computadores, cámaras, muebles) tienen valor neto en libros de <strong>$0</strong> porque la depreciación acumulada es igual al costo total: <span class="num-pill">$17.629.432</span>. El conjunto opera con equipos cuya vida útil contable expiró. El presupuesto 2026 no incluye ninguna partida para adquisición o reposición de equipos.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta observacion" id="o2">
+      <div class="a-hdr" onclick="toggle('o2')">
+        <div class="a-ico">⚖️</div>
+        <div class="a-info">
+          <div class="a-title">Fondo de imprevistos Ley 675 en $0 — infracción legal</div>
+          <div class="a-meta"><span class="tag tag-blu">Observación</span><span class="a-loc">Presupuesto 2025 y 2026</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El artículo 35 de la <strong>Ley 675 de 2001</strong> obliga a constituir un fondo de imprevistos mínimo del <strong>1% del presupuesto anual</strong>. En los presupuestos de 2025 y 2026 esta línea aparece en <span class="num-pill">$0</span>. Su omisión puede constituir incumplimiento legal y exponer al conjunto a sanciones. El 1% del presupuesto 2026 debería ser aproximadamente <span class="num-pill">$2.780.000</span> anuales.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta observacion" id="o3">
+      <div class="a-hdr" onclick="toggle('o3')">
+        <div class="a-ico">🏦</div>
+        <div class="a-info">
+          <div class="a-title">Gastos financieros crecieron 2.094% — posibles sobregiros</div>
+          <div class="a-meta"><span class="tag tag-blu">Observación</span><span class="a-loc">Nota 13</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          Los gastos financieros pasaron de <span class="num-pill">$74.553</span> en 2024 a <span class="num-pill">$1.636.859</span> en 2025: un aumento de <strong>2.094%</strong>. Sin nota explicativa, este nivel puede indicar sobregiros bancarios o comisiones por cheques devueltos, lo cual es coherente con la caja casi vacía detectada en la alerta crítica No. 5.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUÉ PEDIR ── -->
+  <div class="sec-block" id="sec-recomendaciones">
+    <div class="sec-title">
+      <div class="sec-dot" style="background:var(--gold)"></div>
+      <h2>Qué exigir en la asamblea</h2>
+    </div>
+
+    <div class="recom" data-n="01">
+      <div class="recom-title">Soportes de "Obras año" ($70.9M)</div>
+      <div class="recom-desc">Contratos, cotizaciones, nombre del contratista y acta del consejo que autorice el gasto. Sin estos documentos, <strong>no aprobar los estados financieros</strong>.</div>
+    </div>
+    <div class="recom" data-n="02">
+      <div class="recom-title">Plan concreto para cubrir el déficit</div>
+      <div class="recom-desc">Exigir propuesta de cuota extraordinaria, plan de cobro de cartera o reducción de gastos para cubrir los $42.2M de pérdida. Debe quedar en el acta.</div>
+    </div>
+    <div class="recom" data-n="03">
+      <div class="recom-title">Contrato de vigilancia vigente</div>
+      <div class="recom-desc">El contrato que justifique el incremento del 40% en 2025. Verificar si fue aprobado por el consejo o si se firmó sin autorización.</div>
+    </div>
+    <div class="recom" data-n="04">
+      <div class="recom-title">Conciliación bancaria completa</div>
+      <div class="recom-desc">Que explique los $27M en consignaciones sin identificar y por qué la cuenta AV Villas cayó de $30M a $487.038 en un año.</div>
+    </div>
+    <div class="recom" data-n="05">
+      <div class="recom-title">Incluir Fondo de Imprevistos en presupuesto 2026</div>
+      <div class="recom-desc">Mínimo 1% según artículo 35 de la Ley 675 de 2001 (~$2.78M/año). Su omisión es una infracción legal.</div>
+    </div>
+    <div class="recom" data-n="06">
+      <div class="recom-title">Corregir encabezado de estados financieros</div>
+      <div class="recom-desc">El contador debe cambiar el año del título de 2024 a 2025 y re-certificar el documento antes de su aprobación formal.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>Nota:</strong> Este análisis se basa en los documentos presentados a la asamblea y no reemplaza una auditoría formal. Dada la gravedad de los hallazgos, se recomienda contratar un <strong>revisor fiscal independiente</strong> para el período 2026.
+  </div>
+
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="share()" title="Compartir">📤</button>
+<div class="toast" id="toast">Enlace copiado ✓</div>
+
+<script>
+  const filterMap = { red:'active-red', advertencia:'active-amb', observacion:'active-blu', recomendaciones:'active-gld', all:'active-all' };
+
+  function filter(sec, btn) {
+    document.querySelectorAll('.pill').forEach(p => { p.className = 'pill'; });
+    const cls = sec === 'critico' ? 'active-red' : filterMap[sec] || 'active-all';
+    btn.classList.add(cls);
+
+    const all = ['all','critico','advertencia','observacion','recomendaciones'];
+    if (sec === 'all') {
+      all.forEach(s => { const el = document.getElementById('sec-'+s); if(el) el.style.display=''; });
+    } else {
+      document.getElementById('sec-all') && (document.getElementById('sec-all').style.display='none');
+      all.filter(s=>s!=='all').forEach(s => {
+        const el = document.getElementById('sec-'+s);
+        if(el) el.style.display = (s===sec) ? '' : 'none';
+      });
+    }
+    window.scrollTo({ top: 88, behavior: 'smooth' });
+  }
+
+  function toggle(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function expandAll(tipo) {
+    document.querySelectorAll('.alerta.'+tipo).forEach(el => el.classList.add('open'));
+  }
+
+  function share() {
+    const toast = document.getElementById('toast');
+    if (navigator.share) {
+      navigator.share({ title:'Auditoría Recreo San Ignacio 2025', text:'Análisis de estados financieros para la asamblea.' });
+    } else {
+      try { navigator.clipboard.writeText(window.location.href); } catch(e){}
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+  }
+</script>
+</body>
+</html>
