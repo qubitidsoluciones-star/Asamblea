@@ -314,8 +314,8 @@
 <!-- NAV -->
 <div class="nav" id="nav">
   <button class="pill active-all" onclick="filter('all',this)">Todo</button>
-  <button class="pill" onclick="filter('critico',this)">🔴 Críticas (5)</button>
-  <button class="pill" onclick="filter('advertencia',this)">🟡 Advertencias (4)</button>
+  <button class="pill" onclick="filter('critico',this)">🔴 Críticas (7)</button>
+  <button class="pill" onclick="filter('advertencia',this)">🟡 Advertencias (8)</button>
   <button class="pill" onclick="filter('observacion',this)">🔵 Observaciones (3)</button>
   <button class="pill" onclick="filter('recomendaciones',this)">✅ Qué pedir</button>
 </div>
@@ -326,11 +326,11 @@
   <div class="sec-block" id="sec-all">
     <div class="sum-grid">
       <div class="sum-card danger">
-        <div class="sum-num">5</div>
+        <div class="sum-num">7</div>
         <div class="sum-lbl">Alertas críticas</div>
       </div>
       <div class="sum-card warn">
-        <div class="sum-num">4</div>
+        <div class="sum-num">8</div>
         <div class="sum-lbl">Advertencias</div>
       </div>
       <div class="sum-card info">
@@ -364,7 +364,7 @@
     <div class="sec-title">
       <div class="sec-dot" style="background:var(--red)"></div>
       <h2>Alertas críticas</h2>
-      <div class="sec-badge tag tag-red">5 hallazgos</div>
+      <div class="sec-badge tag tag-red">7 hallazgos</div>
     </div>
     <button class="expand-btn" onclick="expandAll('critico')">↕ Expandir todas</button>
 
@@ -466,6 +466,47 @@
         </div>
       </div>
     </div>
+    <div class="alerta critico" id="c6">
+      <div class="a-hdr" onclick="toggle('c6')">
+        <div class="a-ico">🔢</div>
+        <div class="a-info">
+          <div class="a-title">El resultado del ejercicio tiene dos valores distintos en el mismo documento</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Nota 9 vs Nota 15</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          La <strong>Nota 15</strong> (Pérdida o Ganancia del Ejercicio) reporta un resultado de <span class="num-pill">−$42.162.712</span>. Sin embargo, la <strong>Nota 9</strong> (Patrimonio) registra ese mismo concepto como <span class="num-pill">−$24.662.712</span>. La diferencia entre ambas cifras es de <strong>$17.500.000</strong> sin ninguna explicación en el documento. Un estado financiero donde el resultado del ejercicio tiene dos valores distintos <strong>no puede ser aprobado</strong> — es una contradicción matemática interna que invalida la confiabilidad del documento completo.
+          <div class="callout"><strong>Pregunta para la asamblea:</strong> ¿Cuál es el resultado real del ejercicio 2025? ¿−$42.162.712 (Nota 15) o −$24.662.712 (Nota 9)? El contador debe explicar y corregir antes de cualquier votación.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta critico" id="c7">
+      <div class="a-hdr" onclick="toggle('c7')">
+        <div class="a-ico">📊</div>
+        <div class="a-info">
+          <div class="a-title">Gastos reales 2025 superaron el presupuesto aprobado en $85.9M</div>
+          <div class="a-meta"><span class="tag tag-red">Crítico</span><span class="a-loc">Presupuesto 2025 vs Estado de Resultados</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El presupuesto aprobado para 2025 era de <span class="num-pill">$228.168.000</span> tanto en ingresos como en gastos. Los gastos reales ejecutados fueron <span class="num-pill">$314.062.999</span>: un exceso de <strong>$85.894.999 (37.6% por encima de lo aprobado)</strong>. La ley obliga a presentar una ejecución presupuestal comparativa — ese documento <strong>no existe en los papeles entregados a la asamblea</strong>. Gastar un 37.6% más de lo autorizado sin rendir cuentas específicas es una falta grave de control interno.
+          <div class="prog-wrap" style="margin-top:10px">
+            <div class="prog-row"><span>Presupuesto aprobado 2025</span><span style="color:var(--blue)">$228.2M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:73%;background:var(--blue)"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-row"><span>Gastos reales 2025 (+37.6%)</span><span style="color:var(--red)">$314.1M</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--red)"></div></div>
+          </div>
+          <div class="callout"><strong>Nota:</strong> Los ingresos también superaron el presupuesto (<span class="num-pill">$271.9M</span> vs <span class="num-pill">$228.2M</span>, +19.2%), pero el exceso de gastos fue casi el doble del exceso de ingresos, generando el déficit.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── ADVERTENCIAS ── -->
@@ -473,7 +514,7 @@
     <div class="sec-title">
       <div class="sec-dot" style="background:var(--amber)"></div>
       <h2>Advertencias</h2>
-      <div class="sec-badge tag tag-amb">4 hallazgos</div>
+      <div class="sec-badge tag tag-amb">8 hallazgos</div>
     </div>
     <button class="expand-btn" onclick="expandAll('advertencia')">↕ Expandir todas</button>
 
@@ -548,9 +589,84 @@
         </div>
       </div>
     </div>
-  </div>
+    <div class="alerta advertencia" id="w5">
+      <div class="a-hdr" onclick="toggle('w5')">
+        <div class="a-ico">📋</div>
+        <div class="a-info">
+          <div class="a-title">El orden del día salta del punto 8 al 10 — falta el ítem 9</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Convocatoria — Página 1</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          La convocatoria oficial enviada a todos los propietarios enumera los puntos del orden del día con los números 1 al 8, luego salta directamente al 10. El punto <em>"Elección de Delegados, Consejeros, Comité de Convivencia"</em> aparece sin numeración entre el 8 y el 10. Esto significa que el orden del día tiene un <strong>punto 9 no identificado formalmente</strong>. Cualquier votación tomada en un ítem sin número válido en el orden del día puede ser impugnable posteriormente.
+        </div>
+      </div>
+    </div>
 
-  <!-- ── OBSERVACIONES ── -->
+    <div class="alerta advertencia" id="w6">
+      <div class="a-hdr" onclick="toggle('w6')">
+        <div class="a-ico">📝</div>
+        <div class="a-info">
+          <div class="a-title">Nota 2b repite "2024 y 2024" — el período cubierto está mal redactado</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Nota 2b — Página 9</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          La Nota 2b (Período Cubierto) declara textualmente: <em>"Estado de situación financiera: al 31 de diciembre de <strong>2024 y 2024</strong>"</em>. El año correcto debería ser <strong>"2025 y 2024"</strong>. Este error se suma al del encabezado del estado de resultados (que también dice 2024), confirmando que los documentos <strong>nunca fueron revisados ni corregidos</strong> antes de ser entregados a la asamblea. Es evidencia de un proceso de preparación descuidado en un documento legal.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta advertencia" id="w7">
+      <div class="a-hdr" onclick="toggle('w7')">
+        <div class="a-ico">👤</div>
+        <div class="a-info">
+          <div class="a-title">Rubro "Personal" desapareció y el administrador tiene 3 meses sin pagar</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Pág. 5 — Nota 8 — Nota 12</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          En 2024 existía el rubro <strong>"Personal"</strong> con <span class="num-pill">$2.105.766</span>. En 2025 ese rubro aparece en <span class="num-pill">$0</span> y desaparece sin nota explicativa. Al mismo tiempo, <strong>"Honorarios"</strong> pasó de <span class="num-pill">$28.226.000</span> a <span class="num-pill">$31.755.000</span>. La Nota 12 revela que los honorarios incluyen <em>"SS Administración"</em> por <span class="num-pill">$22.200.000</span> (= $1.850.000/mes), lo que sugiere que el gasto del administrador fue reclasificado de Personal a Honorarios <strong>sin ninguna explicación contable</strong>.
+          <br><br>
+          Más grave aún: la Nota 8 muestra que al cierre del año quedaban <span class="num-pill">$5.550.000</span> de honorarios del administrador <strong>sin pagar en el pasivo</strong>, equivalente a <strong>3 meses de honorarios pendientes</strong>. Esto es coherente con la iliquidez detectada en la crítica C5.
+          <div class="callout"><strong>Pregunta para la asamblea:</strong> ¿Por qué se eliminó el rubro Personal y se reclasificó como Honorarios? ¿Bajo qué figura contractual opera el administrador — contrato laboral, prestación de servicios o contrato de administración? La clasificación contable tiene implicaciones tributarias y laborales para la copropiedad.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta advertencia" id="w8">
+      <div class="a-hdr" onclick="toggle('w8')">
+        <div class="a-ico">🧹</div>
+        <div class="a-info">
+          <div class="a-title">El gasto del todero ($36M/año) no aparece en ningún rubro del estado de resultados</div>
+          <div class="a-meta"><span class="tag tag-amb">Advertencia</span><span class="a-loc">Pág. 5 — Nota 8 — Nota 12 — Presupuesto</span></div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="a-body">
+        <div class="a-body-inner">
+          El presupuesto 2025 incluía <strong>"Todero por empresa"</strong> a <span class="num-pill">$3.000.000/mes</span> = <span class="num-pill">$36.000.000/año</span>, bajo la categoría "Gastos de Seguridad y Todero". Sin embargo, ese rubro <strong>no aparece de forma independiente en el estado de resultados ni en la Nota 12</strong>. Los únicos servicios detallados en Nota 12 son vigilancia, aseo, energía y plan celular — y su suma ya cuadra exactamente con el total de <span class="num-pill">$170.513.601</span>, lo que significa que los $36M del todero están <strong>absorbidos dentro de otro rubro sin identificarlos</strong>.
+          <br><br>
+          La Nota 8 sí revela al proveedor: <strong>T PROTEC SAS</strong> (NIT 900.585.988), con <span class="num-pill">$3.947.978</span> pendientes de pago al cierre del año — casi mes y medio sin cancelar. Para 2026, el presupuesto propone subir ese servicio a <span class="num-pill">$3.800.000/mes</span> (+26.7%), sin contrato ni justificación presentada.
+          <div class="prog-wrap" style="margin-top:10px">
+            <div class="prog-row"><span>Todero presupuestado 2025</span><span style="color:var(--text2)">$3.0M/mes</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:79%;background:var(--amber)"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-row"><span>Todero propuesto 2026 (+26.7%)</span><span style="color:var(--amber)">$3.8M/mes</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--amber)"></div></div>
+          </div>
+          <div class="callout"><strong>Pregunta para la asamblea:</strong> ¿En qué rubro del estado de resultados se registró el gasto real del todero en 2025? ¿T PROTEC SAS es la misma empresa de vigilancia o un proveedor distinto? El contrato vigente debe presentarse antes de aprobar el incremento del 26.7%.</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="sec-block" id="sec-observacion">
     <div class="sec-title">
       <div class="sec-dot" style="background:var(--blue)"></div>
@@ -639,6 +755,23 @@
       <div class="recom-title">Corregir encabezado de estados financieros</div>
       <div class="recom-desc">El contador debe cambiar el año del título de 2024 a 2025 y re-certificar el documento antes de su aprobación formal.</div>
     </div>
+    <div class="recom" data-n="07">
+      <div class="recom-title">Aclarar el resultado del ejercicio: ¿−$42.2M o −$24.7M?</div>
+      <div class="recom-desc">La Nota 9 y la Nota 15 reportan cifras distintas para el mismo concepto. El contador debe explicar en asamblea cuál es el valor correcto, corregir el error y re-certificar. <strong>No aprobar estados financieros con esta contradicción.</strong></div>
+    </div>
+    <div class="recom" data-n="08">
+      <div class="recom-title">Exigir la ejecución presupuestal 2025 comparativa</div>
+      <div class="recom-desc">La ley obliga a presentar un informe que compare el presupuesto aprobado vs lo ejecutado rubro por rubro. Los gastos reales superaron el presupuesto en $85.9M (37.6%) sin que exista ese documento. Exigirlo y que quede en acta.</div>
+    </div>
+    <div class="recom" data-n="09">
+      <div class="recom-title">Aclarar la figura contractual del administrador</div>
+      <div class="recom-desc">El rubro "Personal" pasó de $2.1M en 2024 a $0 en 2025, mientras "Honorarios" subió. Exigir explicación de si el administrador tiene contrato laboral, de prestación de servicios o de administración — la clasificación tiene implicaciones legales y tributarias para la copropiedad. Adicionalmente, aclarar por qué quedaron 3 meses de honorarios sin pagar al cierre del año.</div>
+    </div>
+    <div class="recom" data-n="10">
+      <div class="recom-title">Identificar dónde se registró el gasto real del todero</div>
+      <div class="recom-desc">El presupuesto estimaba $36M en todero (T PROTEC SAS) pero ese rubro no aparece de forma independiente en el estado de resultados ni en la Nota 12. Exigir al contador que indique en qué línea contable quedó registrado, y presentar el contrato vigente antes de aprobar el incremento del 26.7% para 2026.</div>
+    </div>
+
   </div>
 
   <!-- FOOTER -->
